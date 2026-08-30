@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes slideUp {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  font-feature-settings: 'ss01' on, 'cv01' on;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.25);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.ink.300');
+  border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: theme('colors.ink.700');
+}
+
+@layer utilities {
+  /* Frosted glass surface used across the redesigned nav, header and landing page. */
+  .glass {
+    @apply bg-white/70 dark:bg-ink-900/60 backdrop-blur-xl border border-white/60 dark:border-white/5;
+  }
+
+  /* Gradient text used for hero headlines and standout numbers. */
+  .text-grad-brand {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-indigo-500 to-accent-500;
+  }
+
+  /* Shimmering skeleton surface — replaces the flat pulse animation. */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      theme('colors.ink.100') 0%,
+      theme('colors.ink.200') 20%,
+      theme('colors.ink.100') 40%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.8s infinite linear;
+  }
+  .dark .shimmer {
+    background: linear-gradient(
+      90deg,
+      theme('colors.ink.800') 0%,
+      theme('colors.ink.700') 20%,
+      theme('colors.ink.800') 40%
+    );
+    background-size: 800px 100%;
+  }
+
+  /* Subtle grid backdrop used behind hero/empty sections for depth. */
+  .bg-grid {
+    background-image: theme('backgroundImage.grid-lines');
+    background-size: 32px 32px;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Hides the scrollbar on horizontal chip/card rows (quick actions, account
+     carousel, tab strips) while keeping them scrollable — matches the native
+     app feel of Flipkart/Blinkit's category rows, which never show a
+     visible scrollbar either. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
